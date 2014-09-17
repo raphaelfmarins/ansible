@@ -1,0 +1,11 @@
+---
+
+- name: start mms-monitoring
+  action: > 
+    shell 
+      nohup ./mongodb-mms-monitoring-agent >> monitoring-agent.log 2>&1 & 
+    args:
+      chdir={{mms_monitoring_dir}}/{{mms_monitoring_install_dir}}
+      creates: monitoring-agent.log
+  async: 45
+  poll: 0

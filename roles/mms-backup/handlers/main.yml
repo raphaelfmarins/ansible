@@ -1,0 +1,11 @@
+---
+
+- name: start mms-backup
+  action: > 
+    shell 
+      nohup ./mongodb-mms-backup-agent >> backup-agent.log 2>&1 &
+    args:
+      chdir={{mms_backup_dir}}/{{mms_backup_install_dir}}
+      creates: backup-agent.log
+  async: 45
+  poll: 0

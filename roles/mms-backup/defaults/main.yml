@@ -1,0 +1,32 @@
+---
+
+mms_backup_dir: '~/'
+
+mms_backup_install_dir: 'mms-backup-{{mms_backup_version}}'
+
+mms_backup_download_dir: '/tmp'
+
+mms_backup_major_version: '2'
+
+mms_backup_minor_version: '5'
+
+mms_backup_micro_version: '0'
+
+mms_backup_build_version: '164'
+
+mms_backup_release_version: '1'
+
+mms_backup_version: '{{mms_backup_major_version}}.{{mms_backup_minor_version}}.{{mms_backup_micro_version}}.{{mms_backup_build_version}}-{{mms_backup_release_version}}'
+
+mms_backup_name_package: 'mongodb-mms-backup-agent-{{mms_backup_version}}.linux_x86_64'
+
+mms_backup_type_package: 'tar.gz'
+
+mms_backup_package: '{{mms_backup_name_package}}.{{mms_backup_type_package}}'
+
+mms_backup_download_url: 'https://mms.mongodb.com/download/agent/backup/{{mms_backup_package}}'
+
+mms_backup_api_key: 'b123'
+
+mms_backup_hosts:
+   localhost: 127.0.0.1

@@ -1,0 +1,51 @@
+---
+
+- name: download mms-monitoring
+  local_action: >
+    get_url
+      url="{{mms_monitoring_download_url}}"
+      dest="{{mms_monitoring_download_dir}}/{{mms_monitoring_package}}"
+  tags: download
+
+- name: unpacks mms-monitoring
+  local_action: >
+    unarchive
+      src="{{mms_monitoring_download_dir}}/{{mms_monitoring_package}}"
+      dest="{{mms_monitoring_download_dir}}/"
+  tags: unpack
+
+- name: ensures {{mms_monitoring_dir}}/{{mms_monitoring_install_dir}} exists
+  file:
+    path="{{mms_monitoring_dir}}/{{mms_monitoring_install_dir}}"
+    state=directory
+  tags: unpack
+
+- name: ensures mms-monitoring is installed at {{mms_monitoring_dir}}/{{mms_monitoring_install_dir}}
+  action: >
+    synchronize
+      src="{{mms_monitoring_download_dir}}/{{mms_monitoring_name_package}}/{{item}}"
+      dest="{{mms_monitoring_dir}}/{{mms_monitoring_install_dir}}"
+      archive=yes
+      recursive=yes
+  tags: unpack
+  with_items:
+    - mongodb-mms-monitoring-agent
+    - monitoring-agent.config
+
+- name: add hosts in /etc/hosts
+  lineinfile: 
+     dest=/etc/hosts 
+     regexp='{{item.key}}$' 
+     line='{{item.value}} {{item.key}}' 
+     owner=root group=root mode=0644
+  with_dict: mms_monitoring_hosts
+  sudo: yes
+
+- name: monitoring-agent.config
+  template:
+    src="monitoring-agent.config"
+    dest="{{mms_monitoring_dir}}/{{mms_monitoring_install_dir}}/monitoring-agent.config"
+    mode=0644
+  tags: config
+  notify: 
+    - start mms-monitoring

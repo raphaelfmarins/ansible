@@ -1,0 +1,32 @@
+---
+
+mms_monitoring_dir: '~/'
+
+mms_monitoring_install_dir: 'mms-monitoring-{{mms_monitoring_version}}'
+
+mms_monitoring_download_dir: '/tmp'
+
+mms_monitoring_major_version: '2'
+
+mms_monitoring_minor_version: '5'
+
+mms_monitoring_micro_version: '0'
+
+mms_monitoring_build_version: '116'
+
+mms_monitoring_release_version: '1'
+
+mms_monitoring_version: '{{mms_monitoring_major_version}}.{{mms_monitoring_minor_version}}.{{mms_monitoring_micro_version}}.{{mms_monitoring_build_version}}-{{mms_monitoring_release_version}}'
+
+mms_monitoring_name_package: 'mongodb-mms-monitoring-agent-{{mms_monitoring_version}}.linux_x86_64'
+
+mms_monitoring_type_package: 'tar.gz'
+
+mms_monitoring_package: '{{mms_monitoring_name_package}}.{{mms_monitoring_type_package}}'
+
+mms_monitoring_download_url: 'https://mms.mongodb.com/download/agent/monitoring/{{mms_monitoring_package}}'
+
+mms_monitoring_api_key: 'b123'
+
+mms_monitoring_hosts:
+   localhost: 127.0.0.1

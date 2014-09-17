@@ -1,0 +1,7 @@
+---
+- name: Install mms
+  hosts: all
+
+  roles:
+    - mms-monitoring
+    - mms-backup
